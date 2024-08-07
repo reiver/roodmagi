@@ -1,12 +1,13 @@
 package verboten
 
 import (
-	"io"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/reiver/go-erorr"
 	"github.com/reiver/go-errhttp"
+	"github.com/reiver/go-httpsse"
 
 	"github.com/reiver/rodmagus/srv/http"
 )
@@ -71,19 +72,19 @@ func serveHTTP(responsewriter http.ResponseWriter, request *http.Request) {
 
 	switch network {
 	case "mastodon":
-		serveMastodon(responsewriter, from)
+		serveMastodon(responsewriter, request, from)
 	default:
 		errhttp.ErrHTTPNotFound.ServeHTTP(responsewriter, request)
 		return
 	}
 }
 
-func serveMastodon(responsewriter http.ResponseWriter, from string) {
+func serveMastodon(responsewriter http.ResponseWriter, request *http.Request, from string) {
 
-	const network string = "mastodon"
+	var route httpsse.Route = httpsse.NewRoute()
 
-	io.WriteString(responsewriter, "network = '"+network+"'\n")
-	io.WriteString(responsewriter, "from = '"+from+"'\n")
+	// Send a heartbeart SSE comment every 4.231 seconds.
+	httpsse.HeartBeat(4231 * time.Millisecond, route)
 
+	route.ServeHTTP(responsewriter, request)
 }
-
