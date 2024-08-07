@@ -32,5 +32,6 @@ func main() {
 			logf("ERROR: HTTP server had problem listening-and-serving: %s", err)
 			return
 		}
+		log("beware i live")
 	}
 }
