@@ -4,4 +4,4 @@ A custom feed server for the decentralized social-media networking and open-soci
 
 ## Author
 
-Package **opt** was written by [Charles Iliya Krempeaux](http://reiver.link)
+Software **roodmagi** was written by [Charles Iliya Krempeaux](http://reiver.link)
