@@ -75,6 +75,8 @@ func serveHTTP(responsewriter http.ResponseWriter, request *http.Request) {
 	}
 
 	switch network {
+	case "bluesky":
+		serveBluesky(responsewriter, request)
 	case "mastodon":
 		serveMastodon(responsewriter, request)
 	default:
@@ -82,6 +84,44 @@ func serveHTTP(responsewriter http.ResponseWriter, request *http.Request) {
 		Logf("unsupported 'network': %q", network)
 		return
 	}
+}
+
+func serveBluesky(responsewriter http.ResponseWriter, request *http.Request) {
+	if nil == responsewriter {
+		Log("nil http.ResponseWriter")
+		return
+	}
+
+	if nil == request {
+		errhttp.ErrHTTPInternalServerError.ServeHTTP(responsewriter, request)
+		Log("nil *http.Request")
+		return
+	}
+
+	var query url.Values
+	{
+		var urloc *url.URL = request.URL
+		if nil == urloc {
+			errhttp.ErrHTTPInternalServerError.ServeHTTP(responsewriter, request)
+			Log("nil http.Request.URL")
+			return
+		}
+
+		query = urloc.Query()
+
+		if len(query) < 0 {
+			errhttp.ErrHTTPBadRequest.ServeHTTP(responsewriter, request)
+			Log("bad request: no query parameters")
+			return
+		}
+	}
+
+	var route httpsse.Route = httpsse.NewRoute()
+
+	// Send a heartbeart SSE comment every 4.231 seconds.
+	httpsse.HeartBeat(4231 * time.Millisecond, route)
+
+	route.ServeHTTP(responsewriter, request)
 }
 
 func serveMastodon(responsewriter http.ResponseWriter, request *http.Request) {
