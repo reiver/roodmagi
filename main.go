@@ -4,34 +4,35 @@ import (
 	"fmt"
 	"net/http"
 
-	_ "github.com/reiver/rodmagus/api"
-	"github.com/reiver/rodmagus/srv/http"
+	_ "github.com/reiver/roodmagi/api"
+	"github.com/reiver/roodmagi/srv/http"
+	. "github.com/reiver/roodmagi/srv/log"
 )
 
 func main() {
-	log("-<([ hello world ])>-")
-	log()
-	log("rodmagus")
-	log("rôd maguš")
-	log("𐎼𐎢𐎫 𐎶𐎦𐎢𐏁")
-	log()
+	Log("-<([ hello world ])>-")
+	Log()
+	Log("roodmagi")
+	Log("rôd maguš")
+	Log("𐎼𐎢𐎫 𐎶𐎦𐎢𐏁")
+	Log()
 
 	var tcpport string = tcpPort()
-	logf("tcp-port = %q", tcpport)
+	Logf("tcp-port = %q", tcpport)
 
 	var addr string = fmt.Sprintf(":%s", tcpport)
-	logf("tcp-address = %q", addr)
+	Logf("tcp-address = %q", addr)
 
 	var handler http.Handler = &httpsrv.Mux
 
 	{
-		log()
-		log("Here we go…")
+		Log()
+		Log("Here we go…")
 		err := http.ListenAndServe(addr, handler)
 		if nil != err {
-			logf("ERROR: HTTP server had problem listening-and-serving: %s", err)
+			Logf("ERROR: HTTP server had problem listening-and-serving: %s", err)
 			return
 		}
-		log("beware i live")
+		Log("beware i live")
 	}
 }
