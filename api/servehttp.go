@@ -28,5 +28,4 @@ func serveHTTP(responsewriter http.ResponseWriter, request *http.Request) {
 	}
 
 	io.WriteString(responsewriter, "bing bong bang it's boomerang")
-
 }
