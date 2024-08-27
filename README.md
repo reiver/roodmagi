@@ -1,4 +1,4 @@
-# rodmagus
+# roodmagi
 
 A custom feed server for the decentralized social-media networking and open-social.
 

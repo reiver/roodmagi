@@ -1,5 +1,5 @@
 package verboten
 
 import (
-	_ "github.com/reiver/rodmagus/api/v1"
+	_ "github.com/reiver/roodmagi/api/v1"
 )

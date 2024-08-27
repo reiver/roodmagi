@@ -10,7 +10,7 @@ import (
 	"github.com/reiver/go-httpsse"
 	"github.com/reiver/go-mstdn/api/v1/streaming/public/local"
 
-	"github.com/reiver/rodmagus/srv/http"
+	"github.com/reiver/roodmagi/srv/http"
 )
 
 const path string = "/v1/streaming/query"
