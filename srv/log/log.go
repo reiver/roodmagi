@@ -9,7 +9,7 @@ import (
 
 var out io.Writer = os.Stdout
 
-// log writes a log.
+// Log writes a log.
 func Log(a ...interface{}) {
 	var builder strings.Builder
 
@@ -18,7 +18,7 @@ func Log(a ...interface{}) {
 	io.WriteString(out, builder.String())
 }
 
-// logf writes a formatted log.
+// Logf writes a formatted log.
 func Logf(format string, a ...interface{}) {
 	var builder strings.Builder
 
