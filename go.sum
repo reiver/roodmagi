@@ -226,8 +226,8 @@ github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236 h1:SrN7tcfD1YQ
 github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236/go.mod h1:g1+Kow7vEx5zz1NxFUe5QZMJlMZMStzNbMoZ4J3C3oY=
 github.com/reiver/go-ascii v0.0.0-20240302002050-442843e5ea02 h1:YviUVCHZw6gaxvLznXQTXp7LwaWzly80TXUsWxwPPi4=
 github.com/reiver/go-ascii v0.0.0-20240302002050-442843e5ea02/go.mod h1:f43/Y1zpLvqorZN0BelarPzO2GrotAQrBy3T08NUSTM=
-github.com/reiver/go-atproto v0.0.0-20240827205753-9a15c4ac7fcf h1:yan7tCsvNVm9KL8V3CQsnTpc+Qhx/Y0s0u9KSnIhAp0=
-github.com/reiver/go-atproto v0.0.0-20240827205753-9a15c4ac7fcf/go.mod h1:5XA5qUsgASDAB0OldysUDZen6lOTvqJ7s//YuKkfCGk=
+github.com/reiver/go-atproto v0.0.0-20240903192902-f8f8e7140c02 h1:v8XLDyrSjGSJaIvKB/UKb3zs0jfA1hcZzAkPbiGq7Eg=
+github.com/reiver/go-atproto v0.0.0-20240903192902-f8f8e7140c02/go.mod h1:e6mtGFTdoW71Ra6PegOR2tt/xZ8Tvpjl7jAsprH1+9M=
 github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f h1:D1QSxKHm8U73XhjsW3SFLkT0zT5pKJi+1KGboMhY1Rk=
 github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f/go.mod h1:F0HbBf+Ak2ZlE8YkDW4Y+KxaUmT0KaaIJK6CXY3cJxE=
 github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc h1:mNFBGeNf9548+jBdaznubw4oyDC9hJOFTDajP72152Y=
@@ -264,8 +264,8 @@ github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4 h1:+jwuqCDWORvXNDT
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4/go.mod h1:WH8mfjs3Mpv2+U7cDIuQieN9opUoD4AuwPqn8M8EtKA=
 github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible h1:Ewax9SN/f+OibeHNDBPI2lsf1t17YRBvKDA4X7CU4vA=
 github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible/go.mod h1:tfGntNDUeEZIAsz0mTu0lF7/IlErc+BpQgO6yxYmJig=
-github.com/reiver/go-xrpc v0.0.0-20240827191410-fe80188780d7 h1:KJn8mQ8Ovp8ReQkpbvfvOCrnGKeWebOMouhztUzo5O4=
-github.com/reiver/go-xrpc v0.0.0-20240827191410-fe80188780d7/go.mod h1:i61w1H5ODbpam28ug+4CrxPGVpmRvHOaBR0nGml9KzM=
+github.com/reiver/go-xrpc v0.0.0-20240903174530-2b704013227f h1:Zh/0N7tnrEEN8S/e7XdJJIKaJppCSdPEODapUMVPgxk=
+github.com/reiver/go-xrpc v0.0.0-20240903174530-2b704013227f/go.mod h1:HBs8rxgoUONFIB/kZwHrbMF0kArewgLvn9yFg6Py0pA=
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
 github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=

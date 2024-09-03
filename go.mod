@@ -5,7 +5,7 @@ go 1.22.4
 require (
 	github.com/fxamacker/cbor/v2 v2.7.0
 	github.com/ipld/go-car v0.6.2
-	github.com/reiver/go-atproto v0.0.0-20240827205753-9a15c4ac7fcf
+	github.com/reiver/go-atproto v0.0.0-20240903192902-f8f8e7140c02
 	github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f
 	github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
 	github.com/reiver/go-httpsse v0.0.0-20240806223648-6ed5a785f3f8
@@ -65,7 +65,7 @@ require (
 	github.com/reiver/go-path v0.0.0-20240327181650-5f2ee05890d8 // indirect
 	github.com/reiver/go-pathmatch v2.2.0+incompatible // indirect
 	github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible // indirect
-	github.com/reiver/go-xrpc v0.0.0-20240827191410-fe80188780d7 // indirect
+	github.com/reiver/go-xrpc v0.0.0-20240903174530-2b704013227f // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230126041949-52956bd4c9aa // indirect
 	github.com/x448/float16 v0.8.4 // indirect
