@@ -4,12 +4,11 @@ go 1.22.4
 
 require (
 	github.com/fxamacker/cbor/v2 v2.7.0
-	github.com/ipld/go-car v0.6.2
-	github.com/reiver/go-atproto v0.0.0-20240903192902-f8f8e7140c02
+	github.com/reiver/go-atproto v0.0.0-20240905152645-4653ea496805
 	github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f
 	github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
 	github.com/reiver/go-httpsse v0.0.0-20240806223648-6ed5a785f3f8
-	github.com/reiver/go-iter v0.0.0-20240808225343-02d5b5ff8ceb
+	github.com/reiver/go-iter v0.0.0-20240905151209-3c956dd37a9f
 	github.com/reiver/go-json v0.0.0-20240828120501-c8794288440c
 	github.com/reiver/go-mstdn v0.0.0-20240809035746-bff1f7e81dea
 	github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d
@@ -41,6 +40,7 @@ require (
 	github.com/ipfs/go-merkledag v0.11.0 // indirect
 	github.com/ipfs/go-metrics-interface v0.0.1 // indirect
 	github.com/ipfs/go-verifcid v0.0.2 // indirect
+	github.com/ipld/go-car v0.6.2 // indirect
 	github.com/ipld/go-codec-dagpb v1.6.0 // indirect
 	github.com/ipld/go-ipld-prime v0.20.0 // indirect
 	github.com/jbenet/goprocess v0.1.4 // indirect
@@ -65,7 +65,7 @@ require (
 	github.com/reiver/go-path v0.0.0-20240327181650-5f2ee05890d8 // indirect
 	github.com/reiver/go-pathmatch v2.2.0+incompatible // indirect
 	github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible // indirect
-	github.com/reiver/go-xrpc v0.0.0-20240903174530-2b704013227f // indirect
+	github.com/reiver/go-xrpc v0.0.0-20240905133829-2de40c4662d8 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/whyrusleeping/cbor-gen v0.0.0-20230126041949-52956bd4c9aa // indirect
 	github.com/x448/float16 v0.8.4 // indirect
