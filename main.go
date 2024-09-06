@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
-	_ "github.com/reiver/roodmagi/api"
 	"github.com/reiver/roodmagi/srv/http"
 	. "github.com/reiver/roodmagi/srv/log"
+
+	// import these package so their init() fuctions and other initializers run.
+	_ "github.com/reiver/roodmagi/api"
+	_ "github.com/reiver/roodmagi/srv/bluesky"
 )
 
 func main() {

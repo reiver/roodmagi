@@ -2,14 +2,11 @@ package verboten
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"time"
 
-	cbor2 "github.com/fxamacker/cbor/v2"
-	"github.com/ipld/go-car"
-	atprotosync "github.com/reiver/go-atproto/com/atproto/sync"
+	atprotorecord "github.com/reiver/go-atproto/record"
 	"github.com/reiver/go-erorr"
 	"github.com/reiver/go-errhttp"
 	"github.com/reiver/go-httpsse"
@@ -17,6 +14,7 @@ import (
 	"github.com/reiver/go-json"
 	"github.com/reiver/go-mstdn/api/v1/streaming/public/local"
 
+	"github.com/reiver/roodmagi/srv/bluesky"
 	"github.com/reiver/roodmagi/srv/http"
 	. "github.com/reiver/roodmagi/srv/log"
 )
@@ -127,7 +125,31 @@ func serveBluesky(responsewriter http.ResponseWriter, request *http.Request) {
 	closer := httpsse.HeartBeat(4231 * time.Millisecond, route)
 	defer closer.Close()
 
-	go func(route httpsse.Route){
+	subscriptionName, subscriptionChannel, err := blueskysrv.FireHose.Subscribe()
+	if nil != err {
+		errhttp.ErrHTTPInternalServerError.ServeHTTP(responsewriter, request)
+		Logf("internal server error: %s", err)
+		return
+	}
+
+	{
+		go func(route httpsse.Route, subscriptionName string) {
+			err = route.PublishEvent(func(ew httpsse.EventWriter)error{
+				if nil == ew {
+					return errNilHTTPSEEEventWriter
+				}
+
+				ew.WriteComment(fmt.Sprintf(" subscription channel-name: %q", subscriptionName))
+
+				return nil
+			})
+			if nil != err {
+				Logf("internal server error: %s", err)
+			}
+		}(route, subscriptionName)
+	}
+
+	go func(route httpsse.Route, subscriptionName string, subscriptionChannel <-chan atprotorecord.Record){
 
 		if nil == route {
 			Log("ERROR: go-routine bluesky: nil httpsse route")
@@ -135,73 +157,26 @@ func serveBluesky(responsewriter http.ResponseWriter, request *http.Request) {
 		}
 		defer route.Close()
 
-		iterator, err := atprotosync.SubscribeRepos()
-		if nil != err {
-			Logf("ERROR: go-routine bluesky: problem with atproto subscribe to 'subscribeRepos': %s", err)
-			return
-		}
-		defer iterator.Close()
-
-		err = iter.For{iterator}.Each(func(msg []byte){
-			Log("go-routine bluesky: next")
-
-			var submsg atprotosync.SubscriptionMessage = atprotosync.SubscriptionMessage(msg)
-
-			var header atprotosync.SubscriptionMessageHeader
-			var payload atprotosync.SubscriptionMessagePayload
-
-			err := submsg.Decode(&header, &payload)
+		defer func() {
+			err := blueskysrv.FireHose.Unsubscribe(subscriptionName)
 			if nil != err {
-				Logf("ERROR: go-routine: subscription-message decode error: %s", err)
+				Log("ERROR: go-routine bluesky: could not unsubscribe %q from bluesky-serive FireHose: %s", subscriptionName, err)
 				return
 			}
+		}()
 
-			var carReader *car.CarReader
+
+		var iterationCount uint64
+		for record := range subscriptionChannel {
+			iterationCount++
+
 			{
-				var err error
-
-				carReader, err = payload.Blocks()
-				if nil != err {
-					Logf("ERROR: go-routine: problem getting blocks from subscription-message payload: %s", err)
-					return
-				}
-				if nil == carReader {
-					Log("ERROR: go-routine: nil CAR-reader")
-					return
-				}
-			}
-
-			for {
-				block, err := carReader.Next()
-				if io.EOF == err {
-					break
-				}
-				if nil != err {
-					Logf("ERROR: go-routine: problem getting next block from CAR-reader: %s", err)
-					break
-				}
-
-				var stuff map[any]any = map[any]any{}
-
-				var blockRawData []byte = block.RawData()
-
-				err = cbor2.Unmarshal(blockRawData, &stuff)
-				if nil != err {
-					Logf("ERROR: go-routine: problem unmarshaling CBOR from block: %s", err)
-					break
-				}
-
-				// Skip anything without "$type".
-				if _, found := stuff["$type"]; !found {
-					continue
-				}
-
 				err = route.PublishEvent(func(ew httpsse.EventWriter)error{
 					if nil == ew {
 						return errNilHTTPSEEEventWriter
 					}
 
-					jsonBytes, err := json.Marshal(stuff)
+					jsonBytes, err := json.Marshal(record)
 					if nil != err {
 						ew.WriteComment(" json-marshal error:")
 						ew.WriteComment(" " + err.Error())
@@ -209,23 +184,20 @@ func serveBluesky(responsewriter http.ResponseWriter, request *http.Request) {
 					}
 
 					ew.WriteComment("raw-data:")
-					ew.WriteComment(fmt.Sprintf("%q", blockRawData))
 					ew.WriteEvent("com.atproto.sync.subscribeRepos")
 					ew.WriteData(string(jsonBytes))
 
 					return nil
 				})
 				if nil != err {
-					Logf("ERROR: go-routine: problem publishing event to httpsse event: %s", err)
+					Logf("ERROR: go-routine: bluesky: iter[%d]: problem publishing event to httpsse event: %s", iterationCount, err)
 					return
 				}
+				Logf("ERROR: go-routine: bluesky: iter[%d]: good!!!", iterationCount)
 			}
-		})
-		if nil != err {
-			Logf("ERROR: go-routine bluesky: problem with post-iterator 'subscribeRepos': %s", err)
-			return
 		}
-	}(route)
+
+	}(route, subscriptionName, subscriptionChannel)
 
 	route.ServeHTTP(responsewriter, request)
 }

@@ -1,35 +1,43 @@
 package blueskysrv
 
 import (
-	"sync"
-
 	cbor2 "github.com/fxamacker/cbor/v2"
+	atprotorecord "github.com/reiver/go-atproto/record"
 	atprotosync "github.com/reiver/go-atproto/com/atproto/sync"
+	_ "github.com/reiver/go-bsky"
 	"github.com/reiver/go-erorr"
 	"github.com/reiver/go-iter"
-//	"github.com/reiver/go-json"
+	"github.com/reiver/go-reg"
 
 	"github.com/reiver/roodmagi/lib/errors"
 	. "github.com/reiver/roodmagi/srv/log"
 )
 
+// FireHose stores the list of subscribers.
+//
+// To subscribe to the Bluesky firehose, call:
+//
+//	channelName, channel, err := blueskysrv.FireHose.Subscribe()
+//	if nil != err {
+//		return err
+//	}
+//	blueskysrv.FireHose.Unsubscribe(channelName)
 var FireHose RepoSubscriber
 
 func init() {
-	Log("[[bluesky-service FireHose] about to spawn toiler ...")
+	Log("[bluesky-service FireHose] about to spawn toiler ...")
 			
 //@TODO: make it so this can recover from a panic(), such as from not being able to connect to the Bluesky server.
 			
 	go func() {
-		Log("[[bluesky-service FireHose] toiler spawned!")
+		Log("[bluesky-service FireHose] toiler spawned!")
 
 		FireHose.Toil()
 	}()
 }
 
 type RepoSubscriber struct {
-	mutex sync.Mutex
-	subscribers map[string]chan any
+	registry reg.Registry[chan atprotorecord.Record]
 }
 
 func (receiver *RepoSubscriber) HasSubscribers() bool {
@@ -37,36 +45,27 @@ func (receiver *RepoSubscriber) HasSubscribers() bool {
 		return false
 	}
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
-
-	return 1 <= len(receiver.subscribers)
+	return 1 <= receiver.registry.Len()
 }
 
-func (receiver *RepoSubscriber) Subscribe() (string, <-chan any, error) {
+func (receiver *RepoSubscriber) Subscribe() (string, <-chan atprotorecord.Record, error) {
 	var noName string
-	var noChannel chan any
+	var noChannel chan atprotorecord.Record
 
 	if nil == receiver {
 		return noName, noChannel, errors.ErrNilReceiver
 	}
 
 	var name string = chronorand()
+	var channel chan atprotorecord.Record = make(chan atprotorecord.Record, 1024)
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
-
-	if nil == receiver.subscribers {
-		receiver.subscribers = map[string]chan any{}
-	}
-
-	if  _, found := receiver.subscribers[name]; found {
+	previous, found := receiver.registry.Set(name, channel)
+	if found {
+		receiver.registry.Set(name, previous)
+		close(channel)
 		return noName, noChannel, errFound
 	}
 
-	var channel chan any = make(chan any, 1024)
-
-	receiver.subscribers[name] = channel
 	return name, channel, nil
 }
 
@@ -75,24 +74,7 @@ func (receiver *RepoSubscriber) Unsubscribe(name string) error {
 		return errors.ErrNilReceiver
 	}
 
-	receiver.mutex.Lock()
-	defer receiver.mutex.Unlock()
-
-	if nil == receiver.subscribers {
-		return errNotFound
-	}
-
-	channel, found := receiver.subscribers[name]
-	if !found {
-		return errNotFound
-	}
-
-	if nil != channel {
-		close(channel)
-	}
-
-	delete(receiver.subscribers, name)
-
+	receiver.registry.Unset(name)
 	return nil
 }
 
@@ -129,7 +111,8 @@ func (receiver *RepoSubscriber) Toil() {
 				return
 			}
 
-			var stuff map[any]any = map[any]any{}
+//			var stuff map[any]any = map[any]any{}
+			var stuff map[string]any = map[string]any{}
 
 			err = cbor2.Unmarshal(cborData, &stuff)
 			if nil != err {
@@ -143,6 +126,47 @@ func (receiver *RepoSubscriber) Toil() {
 			if _, found := stuff["$type"]; !found {
 				Logf("[bluesky-service FireHose] iter[%d]: NOTE: no $type (so skipping)", iterationNumber)
 				return
+			}
+
+			var recordType string
+			{
+				var err error
+
+				recordType, err = atprotorecord.InferType(stuff)
+				if nil != err {
+					Logf("[bluesky-service FireHose] iter[%d]: NOTE: error trying to get $type (so skipping): %s", iterationNumber, err)
+					return
+				}
+			}
+			Logf("[bluesky-service FireHose] iter[%d]: $type = %q", iterationNumber, recordType)
+
+			var record atprotorecord.Record
+			{
+				var created bool
+
+				record, created = atprotorecord.New(recordType)
+				if !created {
+					Logf("[bluesky-service FireHose] iter[%d]: NOTE: could not create (struct) record of $type = %q (so skipping)", iterationNumber, recordType)
+					return
+				}
+
+				err := record.FromMap(stuff)
+				if nil != err {
+					Logf("[bluesky-service FireHose] iter[%d]: get error when trying to load (struct) record from map (so skipping): %s", iterationNumber, err)
+					return
+				}
+			}
+			Logf("[bluesky-service FireHose] iter[%d]: record-type = %T", iterationNumber, record)
+
+			{
+				go func(iterationNumber uint64) {
+					err := receiver.publish(record)
+					if nil != err {
+						Logf("[bluesky-service FireHose] iter[%d]: problem publishing: %s", iterationNumber, err)
+						return
+					}
+					Logf("[bluesky-service FireHose] iter[%d]: published!", iterationNumber)
+				}(iterationNumber)
 			}
 
 /*
@@ -180,4 +204,19 @@ func (receiver *RepoSubscriber) Toil() {
 	}
 
 	Logf("[bluesky-service FireHose] WTF: done after %d iterations?!?!?!?", iterationNumber)
+}
+
+func (receiver *RepoSubscriber) publish(record atprotorecord.Record) error {
+	if nil == receiver {
+		return errors.ErrNilReceiver
+	}
+
+	receiver.registry.For(func(name string, channel chan atprotorecord.Record){
+		go func() {
+			Logf("[bluesky-service FireHose] sending record %q to channel %q", record.RecordType(), name)
+			channel <- record
+		}()
+	})
+
+	return nil
 }

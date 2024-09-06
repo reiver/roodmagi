@@ -4,8 +4,8 @@ go 1.22.4
 
 require (
 	github.com/fxamacker/cbor/v2 v2.7.0
-	github.com/reiver/go-atproto v0.0.0-20240906153838-97b93b841d0f
-	github.com/reiver/go-bsky v0.0.0-20240906154805-d6fc1717af43
+	github.com/reiver/go-atproto v0.0.0-20240906195827-a1832b0df821
+	github.com/reiver/go-bsky v0.0.0-20240906195900-9747c6643d43
 	github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f
 	github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
 	github.com/reiver/go-httpsse v0.0.0-20240806223648-6ed5a785f3f8
@@ -13,7 +13,7 @@ require (
 	github.com/reiver/go-json v0.0.0-20240828120501-c8794288440c
 	github.com/reiver/go-mstdn v0.0.0-20240809035746-bff1f7e81dea
 	github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d
-	github.com/reiver/go-reg v0.0.0-20240906170358-55a776935ee2
+	github.com/reiver/go-reg v0.0.0-20240906195701-6e62f43c2835
 )
 
 require (
