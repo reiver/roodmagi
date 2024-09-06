@@ -63,7 +63,7 @@ require (
 	github.com/reiver/go-jsonint v0.0.0-20240801233651-21b9c52057ee // indirect
 	github.com/reiver/go-jsonstr v0.0.0-20240802000653-a5a8363975f1 // indirect
 	github.com/reiver/go-lck v0.0.0-20240808133902-b56df221c39f // indirect
-	github.com/reiver/go-maps v0.0.0-20240906134759-3345bef5696e // indirect
+	github.com/reiver/go-maps v0.0.0-20240906190342-93be57f28be1 // indirect
 	github.com/reiver/go-nsid v0.0.0-20240827010024-502157631805 // indirect
 	github.com/reiver/go-nul v0.0.0-20240809035333-493a75a3fb25 // indirect
 	github.com/reiver/go-opt v0.0.0-20240809035328-1ff08dec9bc4 // indirect
