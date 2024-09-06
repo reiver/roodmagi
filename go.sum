@@ -268,8 +268,8 @@ github.com/reiver/go-pathmatch v2.2.0+incompatible h1:hFg/Aa8G3+YSfCK1JSvQvY7mIa
 github.com/reiver/go-pathmatch v2.2.0+incompatible/go.mod h1:T2YWRaELNiTfGhs3tNIWwLGlWe2fGmuO8AVcjUPVgnE=
 github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d h1:rIsrZjZ9KbOhDud8wpzKLkwzphXdUOvZGg/h25c/Ul0=
 github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d/go.mod h1:b9ed6nFkWn5atpsqz1SHrqXQrde91TBL4jjX3pGK1Zw=
-github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999 h1:W8Tt4z8nnqf3rGfv6XwHQfomSSnPz5mxH08FKMcqLQA=
-github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999/go.mod h1:P4MhBoVQLOdhisU6M3f2DvbbNBueHw3Y+n4V/Q7xX9Q=
+github.com/reiver/go-reg v0.0.0-20240906170358-55a776935ee2 h1:1MaM/5Xn0ueIi0rKwKSNWXqVteaWnNDzsFhgxIL5mlE=
+github.com/reiver/go-reg v0.0.0-20240906170358-55a776935ee2/go.mod h1:P4MhBoVQLOdhisU6M3f2DvbbNBueHw3Y+n4V/Q7xX9Q=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4 h1:+jwuqCDWORvXNDTMa9DQ5dEd9u/jOpj4XqGVG/B5E1w=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4/go.mod h1:WH8mfjs3Mpv2+U7cDIuQieN9opUoD4AuwPqn8M8EtKA=
 github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible h1:Ewax9SN/f+OibeHNDBPI2lsf1t17YRBvKDA4X7CU4vA=

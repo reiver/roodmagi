@@ -13,7 +13,7 @@ require (
 	github.com/reiver/go-json v0.0.0-20240828120501-c8794288440c
 	github.com/reiver/go-mstdn v0.0.0-20240809035746-bff1f7e81dea
 	github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d
-	github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999
+	github.com/reiver/go-reg v0.0.0-20240906170358-55a776935ee2
 )
 
 require (
