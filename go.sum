@@ -226,8 +226,6 @@ github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236 h1:SrN7tcfD1YQ
 github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236/go.mod h1:g1+Kow7vEx5zz1NxFUe5QZMJlMZMStzNbMoZ4J3C3oY=
 github.com/reiver/go-ascii v0.0.0-20240302002050-442843e5ea02 h1:YviUVCHZw6gaxvLznXQTXp7LwaWzly80TXUsWxwPPi4=
 github.com/reiver/go-ascii v0.0.0-20240302002050-442843e5ea02/go.mod h1:f43/Y1zpLvqorZN0BelarPzO2GrotAQrBy3T08NUSTM=
-github.com/reiver/go-atproto v0.0.0-20240905152645-4653ea496805 h1:OzCo8hXa2rSr6vfeCZY+36ZKSrLsAuGvWVraHOqgL1Q=
-github.com/reiver/go-atproto v0.0.0-20240905152645-4653ea496805/go.mod h1:li4XSw0kzebqLwLStxQEeDOOqAGj/Nz2QcZQbSUFuDI=
 github.com/reiver/go-atproto v0.0.0-20240906153838-97b93b841d0f h1:xQigLKaF8/kJx+RheTUcwFUlgD1AbJsofGIDMrmq4oM=
 github.com/reiver/go-atproto v0.0.0-20240906153838-97b93b841d0f/go.mod h1:bRs1HgqLLRJdUBYY2j3Ctunz3v/snovRT/6UaSdwj0o=
 github.com/reiver/go-bsky v0.0.0-20240906154805-d6fc1717af43 h1:MQmuJBLumPU1XNChtksiuhusf+mgwXK726UIOmkDKtM=
@@ -270,10 +268,8 @@ github.com/reiver/go-pathmatch v2.2.0+incompatible h1:hFg/Aa8G3+YSfCK1JSvQvY7mIa
 github.com/reiver/go-pathmatch v2.2.0+incompatible/go.mod h1:T2YWRaELNiTfGhs3tNIWwLGlWe2fGmuO8AVcjUPVgnE=
 github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d h1:rIsrZjZ9KbOhDud8wpzKLkwzphXdUOvZGg/h25c/Ul0=
 github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d/go.mod h1:b9ed6nFkWn5atpsqz1SHrqXQrde91TBL4jjX3pGK1Zw=
-github.com/reiver/go-reg v0.0.0-20240906034314-c2aa22064622 h1:uhGVWGdf9oqzu+esYhQvDDBioNvgQ4PeSwobM81HP/o=
-github.com/reiver/go-reg v0.0.0-20240906034314-c2aa22064622/go.mod h1:P4MhBoVQLOdhisU6M3f2DvbbNBueHw3Y+n4V/Q7xX9Q=
-github.com/reiver/go-reg v0.0.0-20240906162828-c83b1046a0bc h1:8GzmKiSYuoj4duTCJXp7ZgHUNmGArk/rGK9ddqd7kD8=
-github.com/reiver/go-reg v0.0.0-20240906162828-c83b1046a0bc/go.mod h1:P4MhBoVQLOdhisU6M3f2DvbbNBueHw3Y+n4V/Q7xX9Q=
+github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999 h1:W8Tt4z8nnqf3rGfv6XwHQfomSSnPz5mxH08FKMcqLQA=
+github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999/go.mod h1:P4MhBoVQLOdhisU6M3f2DvbbNBueHw3Y+n4V/Q7xX9Q=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4 h1:+jwuqCDWORvXNDTMa9DQ5dEd9u/jOpj4XqGVG/B5E1w=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4/go.mod h1:WH8mfjs3Mpv2+U7cDIuQieN9opUoD4AuwPqn8M8EtKA=
 github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible h1:Ewax9SN/f+OibeHNDBPI2lsf1t17YRBvKDA4X7CU4vA=

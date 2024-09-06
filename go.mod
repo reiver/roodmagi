@@ -5,6 +5,7 @@ go 1.22.4
 require (
 	github.com/fxamacker/cbor/v2 v2.7.0
 	github.com/reiver/go-atproto v0.0.0-20240906153838-97b93b841d0f
+	github.com/reiver/go-bsky v0.0.0-20240906154805-d6fc1717af43
 	github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f
 	github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
 	github.com/reiver/go-httpsse v0.0.0-20240806223648-6ed5a785f3f8
@@ -12,6 +13,7 @@ require (
 	github.com/reiver/go-json v0.0.0-20240828120501-c8794288440c
 	github.com/reiver/go-mstdn v0.0.0-20240809035746-bff1f7e81dea
 	github.com/reiver/go-pathmux v0.0.0-20240229164030-35fcff1c6e8d
+	github.com/reiver/go-reg v0.0.0-20240906163928-ffe2cb922999
 )
 
 require (
@@ -56,7 +58,6 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/polydawn/refmt v0.89.0 // indirect
 	github.com/reiver/go-ascii v0.0.0-20240302002050-442843e5ea02 // indirect
-	github.com/reiver/go-bsky v0.0.0-20240906154805-d6fc1717af43 // indirect
 	github.com/reiver/go-cast v0.0.0-20240904124821-be0103637c3f // indirect
 	github.com/reiver/go-fallback v0.0.0-20240906145154-1ce9eadf06a8 // indirect
 	github.com/reiver/go-jsonint v0.0.0-20240801233651-21b9c52057ee // indirect
@@ -68,7 +69,6 @@ require (
 	github.com/reiver/go-opt v0.0.0-20240809035328-1ff08dec9bc4 // indirect
 	github.com/reiver/go-path v0.0.0-20240327181650-5f2ee05890d8 // indirect
 	github.com/reiver/go-pathmatch v2.2.0+incompatible // indirect
-	github.com/reiver/go-reg v0.0.0-20240906162828-c83b1046a0bc // indirect
 	github.com/reiver/go-utf8 v2.0.2-0.20240806185936-5dd7c5557d34+incompatible // indirect
 	github.com/reiver/go-xrpc v0.0.0-20240905133829-2de40c4662d8 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
